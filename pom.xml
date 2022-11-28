@@ -18,10 +18,19 @@
 		<kotlin.version>1.6.21</kotlin.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jooq</artifactId>
+			<groupId>org.jooq</groupId>
+			<artifactId>jool</artifactId>
+			<version>0.9.14</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq</artifactId>
+			<version>3.14.8</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
@@ -51,6 +60,36 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-kotlin</artifactId>
+			<version>2.12.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.13.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.3.19</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -82,5 +121,42 @@
 			</plugin>
 		</plugins>
 	</build>
+<profiles>
+	<profile>
+		<id>jooq-service-db</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.jooq</groupId>
+					<artifactId>jooq-codegen-maven</artifactId>
+					<version>3.14.8</version>
+				<configuration>
+					<jdbc>
+						<driver>org.postgresql.Driver</driver>
+						<url>jdbc:postgresql://localhost:5432/tinder_service</url>
+						<user>tinder_service</user>
+						<password>postgres</password>
+					</jdbc>
+					<generator>
+						<name>org.jooq.codegen.KotlinGenerator</name>
+						<database>
+							<name>org.jooq.meta.postgres.PostgresDatabase</name>
+							<excludes>flyway_schema_history</excludes>
+							<inputSchema>public</inputSchema>
+						</database>
+						<target>
+							<packageName>com.pl.sggw.tinder.jooq</packageName>
+							<directory>src/main/kotlin</directory>
+						</target>
+					</generator>
+				</configuration>
+				</plugin>
 
+			</plugins>
+		</build>
+	</profile>
+</profiles>
 </project>

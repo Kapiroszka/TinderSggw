@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tinder_service
+    jdbc-url: jdbc:postgresql://localhost:5432/tinder_service
     username: tinder_service
     password: postgres
     driver-class-name: org.postgresql.Driver
