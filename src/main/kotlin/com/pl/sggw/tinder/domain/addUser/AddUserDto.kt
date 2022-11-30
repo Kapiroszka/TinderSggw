@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 data class AddUserDto(
     val userName : String,
-    var password : String,
+    val password : String,
     val userEmail : String,
     val time : LocalDateTime
 )
