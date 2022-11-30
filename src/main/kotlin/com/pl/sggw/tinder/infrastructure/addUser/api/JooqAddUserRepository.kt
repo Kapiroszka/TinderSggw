@@ -12,6 +12,11 @@ import org.springframework.transaction.annotation.Transactional
 @Repository
 class JooqAddUserRepository(val ctx: DSLContext) : AddUserRepository{
     override fun addUser(addUser: AddUserDto) {
+        if((ctx.fetchExists(ctx.selectFrom(TINDER_USER).where(
+                TINDER_USER.USER_EMAIL.eq(addUser.userEmail))))){
+            return
+
+        }else{
         ctx.insertInto(TINDER_USER)
             .columns(
                 TINDER_USER.USER_NAME,
@@ -21,12 +26,13 @@ class JooqAddUserRepository(val ctx: DSLContext) : AddUserRepository{
                 TINDER_USER.MODIFICATION_TIMESTAMP
             )
             .values(
-                addUser.user_name,
+                addUser.userName,
                 addUser.password,
-                addUser.user_email,
+                addUser.userEmail,
                 addUser.time,
                 addUser.time
             )
             .execute()
+        }
     }
 }

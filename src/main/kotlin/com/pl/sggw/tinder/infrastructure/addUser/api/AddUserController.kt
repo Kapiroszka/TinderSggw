@@ -19,13 +19,11 @@ class AddUserController(val addUserRepository: AddUserRepository) {
     @PostMapping("/add-user")
     @ApiOperation("Add new tinder user")
     fun addUser(@RequestBody request : AddUserRequest){
-        addUserRepository.addUser(
-            AddUserDto(
-            user_name = request.user_name,
+        addUserRepository.addUser(AddUserDto(
+            userName = request.userName,
             password =  request.password,
-            user_email = request.user_email,
+            userEmail = request.userEmail,
             time =  OffsetDateTime.now().toLocalDateTime()
-        )
-        )
+        ))
     }
 }
