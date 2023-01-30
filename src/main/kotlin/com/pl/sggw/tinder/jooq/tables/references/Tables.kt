@@ -5,8 +5,8 @@ package com.pl.sggw.tinder.jooq.tables.references
 
 
 import com.pl.sggw.tinder.jooq.tables.TinderUser
-import com.pl.sggw.tinder.jooq.tables.UserInformation
 import com.pl.sggw.tinder.jooq.tables.UserMatchDecition
+import com.pl.sggw.tinder.jooq.tables.UserPreferences
 
 
 
@@ -16,11 +16,11 @@ import com.pl.sggw.tinder.jooq.tables.UserMatchDecition
 val TINDER_USER = TinderUser.TINDER_USER
 
 /**
- * The table <code>public.user_information</code>.
- */
-val USER_INFORMATION = UserInformation.USER_INFORMATION
-
-/**
  * The table <code>public.user_match_decition</code>.
  */
 val USER_MATCH_DECITION = UserMatchDecition.USER_MATCH_DECITION
+
+/**
+ * The table <code>public.user_preferences</code>.
+ */
+val USER_PREFERENCES = UserPreferences.USER_PREFERENCES
