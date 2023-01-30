@@ -17,7 +17,7 @@ import org.jooq.ForeignKey
 import org.jooq.Identity
 import org.jooq.Name
 import org.jooq.Record
-import org.jooq.Row6
+import org.jooq.Row11
 import org.jooq.Schema
 import org.jooq.Table
 import org.jooq.TableField
@@ -68,9 +68,9 @@ open class TinderUser(
     val ID: TableField<TinderUserRecord, Long?> = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "")
 
     /**
-     * The column <code>public.tinder_user.user_name</code>.
+     * The column <code>public.tinder_user.user_email</code>.
      */
-    val USER_NAME: TableField<TinderUserRecord, String?> = createField(DSL.name("user_name"), SQLDataType.VARCHAR(64).nullable(false), this, "")
+    val USER_EMAIL: TableField<TinderUserRecord, String?> = createField(DSL.name("user_email"), SQLDataType.VARCHAR(126).nullable(false), this, "")
 
     /**
      * The column <code>public.tinder_user.password</code>.
@@ -78,9 +78,34 @@ open class TinderUser(
     val PASSWORD: TableField<TinderUserRecord, String?> = createField(DSL.name("password"), SQLDataType.VARCHAR(100).nullable(false), this, "")
 
     /**
-     * The column <code>public.tinder_user.user_email</code>.
+     * The column <code>public.tinder_user.description</code>.
      */
-    val USER_EMAIL: TableField<TinderUserRecord, String?> = createField(DSL.name("user_email"), SQLDataType.VARCHAR(126).nullable(false), this, "")
+    val DESCRIPTION: TableField<TinderUserRecord, String?> = createField(DSL.name("description"), SQLDataType.CLOB, this, "")
+
+    /**
+     * The column <code>public.tinder_user.phone_number</code>.
+     */
+    val PHONE_NUMBER: TableField<TinderUserRecord, String?> = createField(DSL.name("phone_number"), SQLDataType.VARCHAR(9), this, "")
+
+    /**
+     * The column <code>public.tinder_user.photo</code>.
+     */
+    val PHOTO: TableField<TinderUserRecord, String?> = createField(DSL.name("photo"), SQLDataType.CLOB, this, "")
+
+    /**
+     * The column <code>public.tinder_user.gender</code>.
+     */
+    val GENDER: TableField<TinderUserRecord, String?> = createField(DSL.name("gender"), SQLDataType.VARCHAR(6), this, "")
+
+    /**
+     * The column <code>public.tinder_user.age</code>.
+     */
+    val AGE: TableField<TinderUserRecord, Short?> = createField(DSL.name("age"), SQLDataType.SMALLINT, this, "")
+
+    /**
+     * The column <code>public.tinder_user.degree</code>.
+     */
+    val DEGREE: TableField<TinderUserRecord, String?> = createField(DSL.name("degree"), SQLDataType.CLOB, this, "")
 
     /**
      * The column <code>public.tinder_user.creation_timestamp</code>.
@@ -129,7 +154,7 @@ open class TinderUser(
     override fun rename(name: Name): TinderUser = TinderUser(name, null)
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row11 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row6<Long?, String?, String?, String?, LocalDateTime?, LocalDateTime?> = super.fieldsRow() as Row6<Long?, String?, String?, String?, LocalDateTime?, LocalDateTime?>
+    override fun fieldsRow(): Row11<Long?, String?, String?, String?, String?, String?, String?, Short?, String?, LocalDateTime?, LocalDateTime?> = super.fieldsRow() as Row11<Long?, String?, String?, String?, String?, String?, String?, Short?, String?, LocalDateTime?, LocalDateTime?>
 }
