@@ -99,10 +99,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
+				<version>${kotlin.version}</version>
 				<configuration>
 					<args>
 						<arg>-Xjsr305=strict</arg>
@@ -136,9 +138,9 @@
 				<configuration>
 					<jdbc>
 						<driver>org.postgresql.Driver</driver>
-						<url>jdbc:postgresql://localhost:5432/tinder_service</url>
-						<user>tinder_service</user>
-						<password>postgres</password>
+						<url>jdbc:postgresql://ec2-3-223-213-207.compute-1.amazonaws.com:5432/d93g4h8bnv65q0</url>
+						<user>geriewfzcnosxt</user>
+						<password>0a9f4f0b4eaf42d523ee63ddf474a3db11200f3933bd75f6b97b476d226ad261</password>
 					</jdbc>
 					<generator>
 						<name>org.jooq.codegen.KotlinGenerator</name>
