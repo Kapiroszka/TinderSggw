@@ -41,3 +41,4 @@ class SwaggerConfiguration(private val buildProperties: BuildProperties) {
         listOf()
     )
 }
+

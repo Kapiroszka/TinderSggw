@@ -9,7 +9,7 @@ spring:
     baseline-version: 0
     location: classpath:db/migration
     enabled: true
-    user: d93g4h8bnv65q0
+    user: geriewfzcnosxt
     password: 0a9f4f0b4eaf42d523ee63ddf474a3db11200f3933bd75f6b97b476d226ad261
 
 
