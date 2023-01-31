@@ -33,6 +33,11 @@ class UserController(val userService: UserService) {
         )
     }
 
+    @GetMapping("/test")
+    fun blog(): String {
+        return "blog"
+    }
+
     @PostMapping("/{userEmail}/details")
     @ApiOperation("Add user details")
     fun addUserDetails(@RequestBody request: UserDetailsRequest, @PathVariable userEmail: String) {
