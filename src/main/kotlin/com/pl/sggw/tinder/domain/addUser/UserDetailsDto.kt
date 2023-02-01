@@ -6,11 +6,11 @@ import java.time.LocalDateTime
 data class UserDetailsDto(
     val userEmail: String,
     val description: String?,
-    val phoneNumber: String,
+    val phoneNumber: String?,
     val photo: String?,
-    val gender: Gender,
-    val age: Short,
-    val degree: Degree,
+    val gender: Gender?,
+    val age: Short?,
+    val degree: Degree?,
     val time : LocalDateTime
 )
 
