@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/libs-milestone</url>
-		</repository>
-	</repositories>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -36,13 +29,6 @@
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
 			<version>3.14.8</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<version>2.1.4.RELEASE</version>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -113,19 +99,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${project.parent.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>build-info</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
-				<version>${kotlin.version}</version>
 				<configuration>
 					<args>
 						<arg>-Xjsr305=strict</arg>
@@ -159,9 +136,9 @@
 				<configuration>
 					<jdbc>
 						<driver>org.postgresql.Driver</driver>
-						<url>jdbc:postgresql://ec2-3-223-213-207.compute-1.amazonaws.com:5432/d93g4h8bnv65q0</url>
-						<user>geriewfzcnosxt</user>
-						<password>0a9f4f0b4eaf42d523ee63ddf474a3db11200f3933bd75f6b97b476d226ad261</password>
+						<url>jdbc:postgresql://localhost:5432/tinder_service</url>
+						<user>tinder_service</user>
+						<password>postgres</password>
 					</jdbc>
 					<generator>
 						<name>org.jooq.codegen.KotlinGenerator</name>

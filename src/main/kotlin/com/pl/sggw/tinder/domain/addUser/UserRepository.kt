@@ -7,7 +7,7 @@ interface UserRepository {
     fun getUserDetailsById(userId: Long): UserDetailsDto
     fun getAllPossiblePartnerForUser(userPreferencesDto: UserPreferencesDto): List<UserDetailsDto>
     fun upsertUserPreferences(userPreferencesDto: UserPreferencesDto)
-    fun getUserPreferences(userEmail: String): UserPreferencesDto
+    fun getUserPreferences(userEmail: String): UserPreferencesDto?
     fun getUserId(userEmail: String): Long
     fun findUserId(userEmail: String): Long?
 

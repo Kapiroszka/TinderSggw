@@ -43,6 +43,7 @@ class JooqUserRepository(val ctx: DSLContext) : UserRepository {
             .set(TINDER_USER.DEGREE, userDetailsDto.degree.toString())
             .set(TINDER_USER.MODIFICATION_TIMESTAMP, userDetailsDto.time)
             .where(TINDER_USER.USER_EMAIL.eq(userDetailsDto.userEmail))
+            .execute()
     }
 
     override fun findUserDetailsByEmail(userEmail: String): UserDetailsDto? {
@@ -90,7 +91,8 @@ class JooqUserRepository(val ctx: DSLContext) : UserRepository {
                 userPreferencesDto.time,
                 userPreferencesDto.time
             )
-            .onDuplicateKeyUpdate()
+            .onConflict(USER_PREFERENCES.USER_EMAIL)
+            .doUpdate()
             .set(USER_PREFERENCES.GENDER, userPreferencesDto.gender.toString())
             .set(USER_PREFERENCES.MIN_AGE, userPreferencesDto.minAge)
             .set(USER_PREFERENCES.MAX_AGE, userPreferencesDto.maxAge)
@@ -98,7 +100,7 @@ class JooqUserRepository(val ctx: DSLContext) : UserRepository {
             .execute()
     }
 
-    override fun getUserPreferences(userEmail: String): UserPreferencesDto {
+    override fun getUserPreferences(userEmail: String): UserPreferencesDto? {
         return ctx.select()
             .from(USER_PREFERENCES)
             .where(USER_PREFERENCES.USER_EMAIL.eq(userEmail))
@@ -111,7 +113,7 @@ class JooqUserRepository(val ctx: DSLContext) : UserRepository {
                     time = r.getValue(USER_PREFERENCES.MODIFICATION_TIMESTAMP) as LocalDateTime
                 )
             }
-            .first()
+            .firstOrNull()
     }
 
     override fun getUserId(userEmail: String): Long {
@@ -131,13 +133,13 @@ class JooqUserRepository(val ctx: DSLContext) : UserRepository {
     }
 
     private fun mapToUserDetailsDto(r: Record) = UserDetailsDto(
-        userEmail = r.getValue(TINDER_USER.USER_EMAIL) as String,
+        userEmail = r.getValue(TINDER_USER.USER_EMAIL)!!,
         description = r.getValue(TINDER_USER.DESCRIPTION),
-        phoneNumber = r.getValue(TINDER_USER.PHONE_NUMBER) as String,
-        photo = r.getValue(TINDER_USER.PHOTO) as String,
-        gender = Gender.valueOf(r.getValue(TINDER_USER.GENDER) as String),
-        age = r.getValue(TINDER_USER.AGE) as Short,
-        degree = Degree.valueOf(r.getValue(TINDER_USER.DEGREE) as String),
-        time = r.getValue(TINDER_USER.MODIFICATION_TIMESTAMP) as LocalDateTime,
+        phoneNumber = r.getValue(TINDER_USER.PHONE_NUMBER) ,
+        photo = r.getValue(TINDER_USER.PHOTO),
+        gender = r.getValue(TINDER_USER.GENDER)?.let { Gender.valueOf(it) },
+        age = r.getValue(TINDER_USER.AGE),
+        degree = r.getValue(TINDER_USER.DEGREE)?.let { Degree.valueOf(it) },
+        time = r.getValue(TINDER_USER.MODIFICATION_TIMESTAMP)!!,
     )
 }
