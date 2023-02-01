@@ -36,7 +36,11 @@ class UserService(val userRepository: UserRepository) {
 
     fun getAllPossiblePartnerForUser(userEmail: String): List<UserDetailsDto> {
         val userPreferences = userRepository.getUserPreferences(userEmail)
-        return userRepository.getAllPossiblePartnerForUser(userPreferences)
+        return if (userPreferences == null) {
+            emptyList()
+        } else {
+            userRepository.getAllPossiblePartnerForUser(userPreferences)
+        }
     }
 
     fun getUserDetailsById(userId: Long): UserDetailsDto {
